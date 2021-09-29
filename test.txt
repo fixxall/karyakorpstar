@@ -1,2 +1,0 @@
-Login:
-curl -i -X POST -d "{\"username\": \"test\", \"password\": \"password\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
