@@ -11,7 +11,7 @@ const { validationResult } = require('express-validator');
 exports.signin = (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        return res.status(422).send({ errors: errors.array() })
+        return res.status(422).send({ message: "Invalid input", errors: errors.array() })
     }
     User.findOne({
             where: {

@@ -3,11 +3,34 @@
 ## Description
 API for Karya Korps Taruna, coded in node-express and implementing JWT authentication
 
-## Path
+## Authorization
 
-### Authorization
-#### Login
-recieving password hashed in SHA1
+#### Login:
+1. Recieve npm and SHA1-digested password in JSON
+```Json
+{
+    "npm": "INSERT_NPM",
+    "password": "INSERT_PASSWORD_SHA1_DIGEST"
+}
+```
+2. Sanitize input to only recieve decimal numbers on npm and hexadecimal numbers on password
+3. Check if user exist. If not, return
+4. Check if recieved password matches
+5. Return response
+```json
+{
+    "fullname": "USER_FULLNAME",
+    "accessToken": "BEARER_TOKEN"
+}
+```
+if something went wrong, a json will be sent
+```json
+{
+    "message": "ERROR_MESSAGE"
+}
+```
+
+### API Path
 ##### Windows
 ```bash
 curl -i -X POST -d "{\"npm\": \"INSERT_NPM\", \"password\": \"INSERT_PASSWORD_SHA1_DIGEST\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
@@ -20,7 +43,7 @@ curl -i -X POST -d "{\"npm\": \"21321\", \"password\": \"5baa61e4c9b93f3f0682250
 #### Change password:
 #### Windows
 ```bash
-curl -i -X POST -d "{\"password\": \"INSERT_PASSWORD\", \"newPassword\": \"INSERT_NEW_PASSWORD\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer INSERT_BEARER_TOKEN"
+curl -i -X POST -d "{\"password\": \"INSERT_PASSWORD_SHA1_DIGEST\", \"newPassword\": \"INSERT_NEW_PASSWORD_SHA1_DIGEST\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer INSERT_BEARER_TOKEN"
 ```
 ex:
 ```bash
