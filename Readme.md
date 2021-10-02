@@ -1,6 +1,28 @@
-Login:
-curl -i -X POST -d "{\"npm\": \"21321\", \"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
+# Karya Korps Taruna Poltek SSN Superapp
 
-Change password:
-curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\", \"newPassword\": \"f2c57870308dc87f432e5912d4de6f8e322721ba\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE1NjE5OCwiZXhwIjoxNjMzMjQyNTk4fQ._aIRZG24XrFrsdJ57-6OH79atR8Gind4TGoLFkHDrdg"
- 
+## Description
+API for Karya Korps Taruna, coded in node-express and implementing JWT authentication
+
+## Path
+
+### Authorization
+#### Login
+recieving password hashed in SHA1
+##### Windows
+```bash
+curl -i -X POST -d "{\"npm\": \"INSERT_NPM\", \"password\": \"INSERT_PASSWORD_SHA1_DIGEST\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
+```
+ex:
+```bash
+curl -i -X POST -d "{\"npm\": \"21321\", \"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
+```
+
+#### Change password:
+#### Windows
+```bash
+curl -i -X POST -d "{\"password\": \"INSERT_PASSWORD\", \"newPassword\": \"INSERT_NEW_PASSWORD\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer INSERT_BEARER_TOKEN"
+```
+ex:
+```bash
+curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\", \"newPassword\": \"f2c57870308dc87f432e5912d4de6f8e322721ba\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE1OTQzNywiZXhwIjoxNjMzMjQ1ODM3fQ.lEwqO-IneyXtL4vJIVF0dNAnmbLS9VkC504UL-deIOg"
+```

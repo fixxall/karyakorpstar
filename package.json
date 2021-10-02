@@ -1,7 +1,7 @@
 {
     "name": "karyasuperapp",
     "version": "1.0.0",
-    "description": "Karya Korps Taruna Poltek SSN superapp",
+    "description": "Karya Korps Taruna Poltek SSN Superapp",
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
