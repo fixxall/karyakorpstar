@@ -18,10 +18,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log('Drop and Resync Db');
-//     initial();
-// });
+db.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and Resync Db');
+    initial();
+});
 
 // simple route
 app.get("/", (req, res) => {
@@ -39,14 +39,17 @@ app.listen(PORT, () => {
 var bcrypt = require("bcryptjs");
 const User = db.user;
 
+var crypto = require('crypto')
+function sha1(data) {
+    return crypto.createHash("sha1").update(data).digest("hex");
+}
+
 function initial() {
     User.create({
         id: 1,
         fullname: "test",
-        username: "test",
-        email: "test@test.com",
+        npm: "21321",
         year: 1,
-        npm: "test",
-        password: bcrypt.hashSync("password", 8)
+        password: bcrypt.hashSync(sha1("password")+"21321", 8)
     });
 }

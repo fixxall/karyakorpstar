@@ -6,20 +6,24 @@ const Op = db.Sequelize.Op;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { validationResult } = require('express-validator');
 
 exports.signin = (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).send({ errors: errors.array() })
+    }
     User.findOne({
             where: {
-                username: req.body.username
+                npm: req.body.npm
             }
         })
         .then(user => {
             if (!user) {
                 return res.status(404).send({ message: "User Not found." });
             }
-
             var passwordIsValid = bcrypt.compareSync(
-                req.body.password,
+                req.body.password + req.body.npm,
                 user.password
             );
 
@@ -30,14 +34,11 @@ exports.signin = (req, res) => {
                 });
             }
 
-            var token = jwt.sign({ id: user.id }, config.secret, {
+            var token = jwt.sign({ npm: user.npm }, config.secret, {
                 expiresIn: 86400 // 24 hours
             });
 
             res.status(200).send({
-                id: user.id,
-                username: user.username,
-                email: user.email,
                 fullname: user.fullname,
                 accessToken: token
             });
@@ -50,15 +51,14 @@ exports.signin = (req, res) => {
 exports.changePassword = (req, res) => {
     User.findOne({
         where: {
-            username: req.body.username
+            npm: req.npm
         }
     }).then(user => {
         if (!user) {
             return res.status(404).send({ message: "User Not found." });
         }
-
         var passwordIsValid = bcrypt.compareSync(
-            req.body.password,
+            req.body.password+req.npm,
             user.password
         );
 
@@ -71,7 +71,7 @@ exports.changePassword = (req, res) => {
             User.update({
                 password: bcrypt.hashSync(req.body.newPassword, 8)
             }, {
-                where: { username: req.body.username }
+                where: { npm: req.npm }
             }).then(user => {
                 res.send({ message: "Password changed successfully!" });
             }).catch(err => {
