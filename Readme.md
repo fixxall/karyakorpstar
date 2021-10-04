@@ -1,6 +1,6 @@
 # Karya Korps Taruna Poltek SSN Superapp
 
-## Description
+## DescriptionNd
 API for Karya Korps Taruna, coded in node-express and implementing JWT authentication
 
 ## Authorization
