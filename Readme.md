@@ -6,6 +6,7 @@ API for Karya Korps Taruna, coded in node-express and implementing JWT authentic
 ## Authorization
 
 ### Login:
+[POST] /api/auth/login
 1. Recieve npm and SHA1-digested password in JSON
 ```Json
 {
@@ -29,7 +30,12 @@ if something went wrong, a json will be sent
     "message": "ERROR_MESSAGE"
 }
 ```
-
+for any other path, use Headers
+```json
+{
+    "Authorization": "Bearer INSERT_BEARER_TOKEN",
+}
+```
 #### API Path
 ##### Windows
 ```bash
@@ -41,6 +47,7 @@ curl -i -X POST -d "{\"npm\": \"21321\", \"password\": \"5baa61e4c9b93f3f0682250
 ```
 
 ### Change password:
+[POST] /api/auth/changePassword
 #### API Path
 ##### Windows
 ```bash
@@ -53,11 +60,19 @@ curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\",
 
 ## Fasting
 ### Register
+[POST] /api/fasting/register
 ```bash
-curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE4NjA4MSwiZXhwIjoxNjMzMjcyNDgxfQ.nttJ45rmQWR-xXxkZPowwaZP5sSWjr8pmyrYrXdJRLI"
+curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
 ```
 
 ### Cancel
+[POST] /api/fasting/cancel
 ```bash
 curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE4NjA4MSwiZXhwIjoxNjMzMjcyNDgxfQ.nttJ45rmQWR-xXxkZPowwaZP5sSWjr8pmyrYrXdJRLI"
+```
+
+### All
+[GET] /api/fasting/all
+```bash
+curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
 ```

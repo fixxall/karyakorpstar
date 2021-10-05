@@ -14,4 +14,6 @@ module.exports = function(app) {
     app.post("/api/fasting/register", [authJwt.verifyToken], controller.register);
 
     app.post("/api/fasting/cancel", [authJwt.verifyToken], controller.cancel);
+
+    app.get("/api/fasting/list", [authJwt.verifyToken], controller.list);
 };

@@ -22,11 +22,19 @@ exports.cancel = (req, res) => {
 };
 
 exports.list = (req, res) => {
-    User.all().then(users => {
-        FastingRecord.all().then( fastingrecords => {
-            const data = {}
+    User.findAll().then(users => {
+        FastingRecord.findAll().then( fastingrecords => {
+            const data = []
+            const listednpms = []
+            fastingrecords.forEach(record => {
+                listednpms.push(record.npm);
+            });
             users.forEach(user => {
-                data[user.npm] = True;
+                if (listednpms.includes(user.npm)) {
+                  data.push({npm: user.npm, registered: true});
+                }else {
+                  data.push({npm: user.npm, registered: false});
+                }
             });
             res.status(200).send({data: data});
         });
