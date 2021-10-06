@@ -31,9 +31,9 @@ exports.list = (req, res) => {
             });
             users.forEach(user => {
                 if (listednpms.includes(user.npm)) {
-                  data.push({npm: user.npm, registered: true});
+                  data.push({npm: user.npm, fullname: user.fullname, registered: true});
                 }else {
-                  data.push({npm: user.npm, registered: false});
+                  data.push({npm: user.npm, fullname: user.fullname, registered: false});
                 }
             });
             res.status(200).send({data: data});
@@ -42,3 +42,11 @@ exports.list = (req, res) => {
         res.status(500).send({ message: err.message });
     });
 };
+
+exports.clear = (req, res) => {
+    FastingRecord.destroy({ where: {}}).then( data => {
+        res.status(200).send({ message: "Cleared successfully!" });
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+}
