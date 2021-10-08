@@ -1,6 +1,5 @@
 const controller = require("../controllers/fastingrecord.controller");
 const { authJwt } = require("../middleware");
-const { check } = require('express-validator')
 
 module.exports = function(app) {
     app.use(function(req, res, next) {

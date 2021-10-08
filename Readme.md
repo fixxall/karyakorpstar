@@ -131,3 +131,64 @@ ex:
 ```bash
 curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
 ```
+
+## Commerce
+### Order
+[POST] /api/commerce/order
+#### Sent data
+```json
+{
+    "productname": "INSERT_PRODUCT_NAME",
+    "price": "INSERT_PRODUCT_PRICE",
+    "quantity": "INSERT_PRODUCT_QUANTITY"
+}
+```
+#### Response
+```json
+{
+    "message": "MESSAGE"
+}
+```
+##### Windows curl
+ex:
+```bash
+curl -i -X POST localhost:8080/api/commerce/order -d "{\"productname\": \"Susu Bubuk Coklat Indomilk 800g\", \"price\": \"68500\", \"quantity\": \"1\"}" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzU3NTQ1MywiZXhwIjoxNjMzNjYxODUzfQ.O3qSY0HjMD4iJJSQwpUqDlpfUcFSUH5V8aLlUwauzsQ"
+```
+
+### All
+[GET] /api/commerce/all
+#### Response
+```json
+{
+    "data":[
+        {
+            "npm": "NPM1",
+            "fullname": "FULLNAME1",
+            "registered": true or false
+            }, {
+                "npm": "NPM2",
+                "fullname": "FULLNAME2",
+                "registered": true or false
+            }
+        ]
+    }
+    ```    
+##### Windows curl
+ex:
+```bash
+curl -i -X GET localhost:8080/api/commerce/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzU3NTQ1MywiZXhwIjoxNjMzNjYxODUzfQ.O3qSY0HjMD4iJJSQwpUqDlpfUcFSUH5V8aLlUwauzsQ"
+```
+
+### Clear
+[POST] /api/commerce/clear
+#### response
+```json
+{
+    "message": "MESSAGE"
+}
+```    
+##### Windows curl
+ex:
+```bash
+curl -i -X POST localhost:8080/api/commerce/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+```

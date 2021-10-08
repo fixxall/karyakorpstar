@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("fasting_records", {
+    const FastingRecord = sequelize.define("fasting_records", {
         npm: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -7,5 +7,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return User;
+    return FastingRecord;
 };
