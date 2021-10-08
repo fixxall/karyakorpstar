@@ -62,12 +62,12 @@ exports.download = (req, res) => {
         FastingRecord.findAll({
             include: {
                 model: User,
-                attributes: ['npm', 'fullname', 'year']
+                attributes: ['npm', 'fullname', 'class']
             }
         }).then(fastingrecords => {
             array = []
             fastingrecords.forEach((record) => {
-                array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, year: record.user.year})
+                array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, class: record.user.class})
             });
 
             const csvWriter = createCsvWriter({
@@ -76,7 +76,7 @@ exports.download = (req, res) => {
                     { id: "id", title: "id" },
                     { id: "npm", title: "npm" },
                     { id: "fullname", title: "fullname" },
-                    { id: "year", title: "year" }
+                    { id: "class", title: "class" }
                 ]
             });
             csvWriter.writeRecords(array).then(() => {

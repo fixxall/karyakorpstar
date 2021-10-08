@@ -23,6 +23,17 @@ db.sequelize.sync({ force: true }).then(() => {
     initial();
 });
 
+const cron = require('node-cron');
+const fsExtra = require('fs-extra')
+
+cron.schedule('0 0 * * *', function() {
+  console.log('---------------------');
+  console.log('Running Cron Job');
+  fsExtra.emptyDirSync('./app/controllers/export', err => {
+    if (err) throw err;
+  });
+});
+
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
@@ -54,25 +65,27 @@ function initial() {
         id: 1,
         fullname: "Herisa Pratama Nur Baeti",
         npm: "2019101608",
-        year: 2,
+        class: "2 RPLK",
         password: bcrypt.hashSync(sha1("password")+"2019101608", 8)
     },{
         id: 2,
         fullname: "Herlambang Rafli Wicaksono",
         npm: "2019101609",
-        year: 2,
+        class: "2 RPLK",
         password: bcrypt.hashSync(sha1("password")+"2019101609", 8)
     },{
         id: 3,
         fullname: "Abidah Salsabila Putri Sanita",
         npm: "1918101609",
-        year: 3,
+        class: "3 RKS Python",
         password: bcrypt.hashSync(sha1("password")+"1918101609", 8)
     }]);
     Config.create({
         id: 1,
         fastingopen: true,
-        fastingdate: '2021-10-9'
+        fastingdate: 'Sat, 09 Oct 2021 00:00:00 EDT',
+        commerceopen: true,
+        commercedate: 'Sat, 09 Oct 2021 00:00:00 EDT'
     });
     FastingRecord.create({
         npm: "1918101609"

@@ -20,5 +20,18 @@ module.exports = function(app) {
 
     app.get("/api/commerce/list", [authJwt.verifyToken], controller.list);
 
+    app.get("/api/commerce/all", [authJwt.verifyToken], controller.all);
+
+    app.post("/api/commerce/admit", [authJwt.verifyToken], controller.admit);
+
+    app.post("/api/commerce/deny", [authJwt.verifyToken], controller.deny);
+
+    app.post("/api/commerce/modify", [
+        authJwt.verifyToken,
+        check('id').isNumeric(),
+        check('quantity').isNumeric(),
+        check('price').isNumeric()
+    ], controller.modify);
+
     app.post("/api/commerce/clear", [authJwt.verifyToken], controller.clear);
 };

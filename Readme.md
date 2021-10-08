@@ -71,7 +71,7 @@ curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\",
 #### Sent data
 ```json
 {
-    "fastingdate": "DATE_TO_OPEN_FASTING_IN_YYYY-MM-DD_FORMAT"
+    "fastingdate": "DATE_TO_OPEN_FASTING_IN_RFC2822_DATE_FORMAT"
 }
 ```
 #### Response

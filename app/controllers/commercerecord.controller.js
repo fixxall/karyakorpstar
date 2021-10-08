@@ -24,13 +24,51 @@ exports.order = (req, res) => {
 };
 
 exports.list = (req, res) => {
+    CommerceRecord.findAll({ where: {npm: req.npm} }).then( commercerecords => {
+        res.status(200).send({data: commercerecords});
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+};
+
+exports.all = (req, res) => {
     CommerceRecord.findAll({
         include: {
             model: User,
-            attributes: ['npm', 'fullname', 'year']
+            attributes: ['npm', 'fullname', 'class']
         }
     }).then( commercerecords => {
         res.status(200).send({data: commercerecords});
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+};
+
+exports.admit = (req, res) => {
+    CommerceRecord.update({ where: { id: req.body.id },
+        status: "ADMITTED"
+    }).then( commercerecords => {
+        res.status(200).send({ message: 'Admitted successfully'});
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+};
+
+exports.deny = (req, res) => {
+    CommerceRecord.update({ where: { id: req.body.id },
+        status: "DENIED"
+    }).then( commercerecords => {
+        res.status(200).send({ message: 'Denied successfully'});
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+};
+
+exports.modify = (req, res) => {
+    CommerceRecord.update({ where: { id: req.body.id },
+        quantity: req.body.quantity, price: req.body.price, status: "MODIFIED"
+    }).then( commercerecords => {
+        res.status(200).send({ message: 'Modified successfully' });
     }).catch(err => {
         res.status(500).send({ message: err.message });
     });

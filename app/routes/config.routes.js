@@ -13,7 +13,7 @@ module.exports = function(app) {
 
     app.post("/api/config/openfasting", [
         authJwt.verifyToken,
-        check('fastingdate').isLength({max: 10})
+        check('fastingdate').isLength({max: 29, min: 29})
     ], controller.openfasting);
 
     app.post("/api/config/closefasting", [
