@@ -68,10 +68,9 @@ exports.download = (req, res) => {
         fastingrecords.forEach((record) => {
             array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, year: record.user.year})
         });
-        console.log(array);
 
         const csvWriter = createCsvWriter({
-            path: './export/temp.csv',
+            path: `${__dirname}/export/temp.csv`,
             header: [
                 { id: "id", title: "id" },
                 { id: "npm", title: "npm" },
@@ -80,7 +79,9 @@ exports.download = (req, res) => {
             ]
         });
         csvWriter.writeRecords(array).then(() => {
-            res.status(200).send({ message: "File written successfully!" });
+            res.setHeader('Content-disposition', 'attachment; filename=' + 'datapuasa.csv');
+            const file = `${__dirname}/export/temp.csv`;
+            res.download(file);
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });

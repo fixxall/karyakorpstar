@@ -168,9 +168,10 @@ ex:
 curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
 ```
 
-### Clear
-[POST] /api/fasting/download
+### Download
+[GET] /api/fasting/download
 #### response
+A file named ```temp.csv``` or
 ```json
 {
     "message": "MESSAGE"
@@ -179,7 +180,7 @@ curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/j
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/download -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+curl -i -X GET localhost:8080/api/fasting/download -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
 ```
 
 ### Note

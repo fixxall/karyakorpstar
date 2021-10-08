@@ -30,7 +30,7 @@ module.exports = function(app) {
         config.fastingIsOpen
     ], controller.clear);
 
-    app.post("/api/fasting/download", [
+    app.get("/api/fasting/download", [
         authJwt.verifyToken,
         config.fastingIsOpen
     ], controller.download);
