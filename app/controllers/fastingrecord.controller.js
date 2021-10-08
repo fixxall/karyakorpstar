@@ -58,30 +58,32 @@ exports.clear = (req, res) => {
 };
 
 exports.download = (req, res) => {
-    FastingRecord.findAll({
-        include: {
-            model: User,
-            attributes: ['npm', 'fullname', 'year']
-        }
-    }).then(fastingrecords => {
-        array = []
-        fastingrecords.forEach((record) => {
-            array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, year: record.user.year})
-        });
+    Config.findOne({where: {id: 1} }).then(config => {
+        FastingRecord.findAll({
+            include: {
+                model: User,
+                attributes: ['npm', 'fullname', 'year']
+            }
+        }).then(fastingrecords => {
+            array = []
+            fastingrecords.forEach((record) => {
+                array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, year: record.user.year})
+            });
 
-        const csvWriter = createCsvWriter({
-            path: `${__dirname}/export/temp.csv`,
-            header: [
-                { id: "id", title: "id" },
-                { id: "npm", title: "npm" },
-                { id: "fullname", title: "fullname" },
-                { id: "year", title: "year" }
-            ]
-        });
-        csvWriter.writeRecords(array).then(() => {
-            res.setHeader('Content-disposition', 'attachment; filename=' + 'datapuasa.csv');
-            const file = `${__dirname}/export/temp.csv`;
-            res.download(file);
+            const csvWriter = createCsvWriter({
+                path: `${__dirname}/export/datapuasa_${config.fastingdate}.csv`,
+                header: [
+                    { id: "id", title: "id" },
+                    { id: "npm", title: "npm" },
+                    { id: "fullname", title: "fullname" },
+                    { id: "year", title: "year" }
+                ]
+            });
+            csvWriter.writeRecords(array).then(() => {
+                res.setHeader('Content-disposition', 'attachment; filename=' + 'datapuasa.csv');
+                const file = `${__dirname}/export/datapuasa_${config.fastingdate}.csv`;
+                res.download(file);
+            });
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });

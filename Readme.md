@@ -34,7 +34,7 @@ if something went wrong, a json will be sent
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST -d "{\"npm\": \"21321\", \"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
+curl -i -X POST -d "{\"npm\": \"2019101608\", \"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
 ```
 
 ### Authentication
@@ -112,7 +112,7 @@ curl -i -X POST localhost:8080/api/config/closefasting -H "Content-Type: applica
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMDE5MTAxNjA4IiwiaWF0IjoxNjMzNjg4NzE5LCJleHAiOjE2MzM3NzUxMTl9.Kel3rmdHU4WxQvQSlWhX3SIAUT5aZPYV7hI51-QWJQs"
 ```
 
 ### Cancel
@@ -151,7 +151,7 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
 ##### Windows curl
 ex:
 ```bash
-curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMDE5MTAxNjA4IiwiaWF0IjoxNjMzNjg4NzE5LCJleHAiOjE2MzM3NzUxMTl9.Kel3rmdHU4WxQvQSlWhX3SIAUT5aZPYV7hI51-QWJQs"
 ```
 
 ### Clear
@@ -176,11 +176,6 @@ A file named ```temp.csv``` or
 {
     "message": "MESSAGE"
 }
-```    
-##### Windows curl
-ex:
-```bash
-curl -i -X GET localhost:8080/api/fasting/download -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
 ```
 
 ### Note

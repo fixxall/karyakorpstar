@@ -42,6 +42,7 @@ app.listen(PORT, () => {
 var bcrypt = require("bcryptjs");
 const User = db.user;
 const Config = db.config;
+const FastingRecord = db.fastingrecord;
 
 var crypto = require('crypto')
 function sha1(data) {
@@ -49,16 +50,31 @@ function sha1(data) {
 }
 
 function initial() {
-    User.create({
+    User.bulkCreate([{
         id: 1,
-        fullname: "test",
-        npm: "21321",
-        year: 1,
-        password: bcrypt.hashSync(sha1("password")+"21321", 8)
-    });
+        fullname: "Herisa Pratama Nur Baeti",
+        npm: "2019101608",
+        year: 2,
+        password: bcrypt.hashSync(sha1("password")+"2019101608", 8)
+    },{
+        id: 2,
+        fullname: "Herlambang Rafli Wicaksono",
+        npm: "2019101609",
+        year: 2,
+        password: bcrypt.hashSync(sha1("password")+"2019101609", 8)
+    },{
+        id: 3,
+        fullname: "Abidah Salsabila Putri Sanita",
+        npm: "1918101609",
+        year: 3,
+        password: bcrypt.hashSync(sha1("password")+"1918101609", 8)
+    }]);
     Config.create({
         id: 1,
         fastingopen: true,
         fastingdate: '2021-10-9'
+    });
+    FastingRecord.create({
+        npm: "1918101609"
     })
 }
