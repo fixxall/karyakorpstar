@@ -68,6 +68,12 @@ curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\",
 ## Configuration
 ### Open fasting
 [POST] /api/config/openfasting
+#### Sent data
+```json
+{
+    "fastingdate": "DATE_TO_OPEN_FASTING_IN_YYYY-MM-DD_FORMAT"
+}
+```
 #### Response
 ```json
 {
@@ -139,7 +145,7 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
             "registered": true or false
         }
     ],
-    "date": "FASTING_DATE"
+    "date": "FASTING_DATE_IN_YYYY-MM-DD_FORMAT"
 }
 ```    
 ##### Windows curl
@@ -160,6 +166,20 @@ curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/jso
 ex:
 ```bash
 curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+```
+
+### Clear
+[POST] /api/fasting/download
+#### response
+```json
+{
+    "message": "MESSAGE"
+}
+```    
+##### Windows curl
+ex:
+```bash
+curl -i -X POST localhost:8080/api/fasting/download -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
 ```
 
 ### Note

@@ -5,6 +5,8 @@ const FastingRecord = db.fastingrecord;
 const Config = db.config;
 
 const Op = db.Sequelize.Op;
+const csvwriter = require("csv-writer");
+const createCsvWriter = csvwriter.createObjectCsvWriter;
 
 exports.register = (req, res) => {
     FastingRecord.create({ npm: req.npm }).then(user => {
@@ -53,4 +55,34 @@ exports.clear = (req, res) => {
     }).catch(err => {
         res.status(500).send({ message: err.message });
     });
-}
+};
+
+exports.download = (req, res) => {
+    FastingRecord.findAll({
+        include: {
+            model: User,
+            attributes: ['npm', 'fullname', 'year']
+        }
+    }).then(fastingrecords => {
+        array = []
+        fastingrecords.forEach((record) => {
+            array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, year: record.user.year})
+        });
+        console.log(array);
+
+        const csvWriter = createCsvWriter({
+            path: './export/temp.csv',
+            header: [
+                { id: "id", title: "id" },
+                { id: "npm", title: "npm" },
+                { id: "fullname", title: "fullname" },
+                { id: "year", title: "year" }
+            ]
+        });
+        csvWriter.writeRecords(array).then(() => {
+            res.status(200).send({ message: "File written successfully!" });
+        });
+    }).catch(err => {
+        res.status(500).send({ message: err.message });
+    });
+};

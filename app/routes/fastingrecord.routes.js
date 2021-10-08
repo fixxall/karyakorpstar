@@ -29,4 +29,9 @@ module.exports = function(app) {
         authJwt.verifyToken,
         config.fastingIsOpen
     ], controller.clear);
+
+    app.post("/api/fasting/download", [
+        authJwt.verifyToken,
+        config.fastingIsOpen
+    ], controller.download);
 };
