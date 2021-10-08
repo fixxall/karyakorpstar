@@ -1,5 +1,5 @@
 const controller = require("../controllers/fastingrecord.controller");
-const { authJwt } = require("../middleware");
+const { authJwt, config } = require("../middleware");
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -10,11 +10,23 @@ module.exports = function(app) {
         next();
     });
 
-    app.post("/api/fasting/register", [authJwt.verifyToken], controller.register);
+    app.post("/api/fasting/register", [
+        authJwt.verifyToken,
+        config.fastingIsOpen
+    ], controller.register);
 
-    app.post("/api/fasting/cancel", [authJwt.verifyToken], controller.cancel);
+    app.post("/api/fasting/cancel", [
+        authJwt.verifyToken,
+        config.fastingIsOpen
+    ], controller.cancel);
 
-    app.get("/api/fasting/list", [authJwt.verifyToken], controller.list);
+    app.get("/api/fasting/list", [
+        authJwt.verifyToken,
+        config.fastingIsOpen
+    ], controller.list);
 
-    app.post("/api/fasting/clear", [authJwt.verifyToken], controller.clear);
+    app.post("/api/fasting/clear", [
+        authJwt.verifyToken,
+        config.fastingIsOpen
+    ], controller.clear);
 };

@@ -65,6 +65,35 @@ ex:
 curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\", \"newPassword\": \"f2c57870308dc87f432e5912d4de6f8e322721ba\"}" localhost:8080/api/auth/changePassword -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE1OTQzNywiZXhwIjoxNjMzMjQ1ODM3fQ.lEwqO-IneyXtL4vJIVF0dNAnmbLS9VkC504UL-deIOg"
 ```
 
+## Configuration
+### Open fasting
+[POST] /api/config/openfasting
+#### Response
+```json
+{
+    "message": "MESSAGE"
+}
+```
+##### Windows curl
+ex:
+```bash
+curl -i -X POST localhost:8080/api/config/openfasting -d "{\"fastingdate\": \"2021-10-9\"}" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+```
+
+### Close fasting
+[POST] /api/config/closefasting
+#### Response
+```json
+{
+    "message": "MESSAGE"
+}
+```
+##### Windows curl
+ex:
+```bash
+curl -i -X POST localhost:8080/api/config/closefasting -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+```
+
 ## Fasting
 ### Register
 [POST] /api/fasting/register
@@ -77,7 +106,7 @@ curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\",
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
 ```
 
 ### Cancel
@@ -104,18 +133,19 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
             "npm": "NPM1",
             "fullname": "FULLNAME1",
             "registered": true or false
-            }, {
-                "npm": "NPM2",
-                "fullname": "FULLNAME2",
-                "registered": true or false
-            }
-        ]
-    }
-    ```    
+        }, {
+            "npm": "NPM2",
+            "fullname": "FULLNAME2",
+            "registered": true or false
+        }
+    ],
+    "date": "FASTING_DATE"
+}
+```    
 ##### Windows curl
 ex:
 ```bash
-curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
 ```
 
 ### Clear
@@ -130,6 +160,14 @@ curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/jso
 ex:
 ```bash
 curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+```
+
+### Note
+If the fasting fiture is turned off in the configuration, a 403 response with json will be sent
+```json
+{
+    "message": "Routes is closed!"
+}
 ```
 
 ## Commerce
@@ -160,19 +198,9 @@ curl -i -X POST localhost:8080/api/commerce/order -d "{\"productname\": \"Susu B
 #### Response
 ```json
 {
-    "data":[
-        {
-            "npm": "NPM1",
-            "fullname": "FULLNAME1",
-            "registered": true or false
-            }, {
-                "npm": "NPM2",
-                "fullname": "FULLNAME2",
-                "registered": true or false
-            }
-        ]
-    }
-    ```    
+
+}
+```    
 ##### Windows curl
 ex:
 ```bash

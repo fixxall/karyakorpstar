@@ -19,6 +19,7 @@ db.sequelize = sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.fastingrecord = require("../models/fastingrecord.model.js")(sequelize, Sequelize);
 db.commercerecord = require("../models/commercerecord.model.js")(sequelize, Sequelize);
+db.config = require("../models/config.model.js")(sequelize, Sequelize);
 
 db.user.hasOne(db.fastingrecord, {
   foreignKey: 'npm'

@@ -31,6 +31,7 @@ require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/fastingrecord.routes')(app);
 require('./app/routes/commercerecord.routes')(app);
+require('./app/routes/config.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -40,6 +41,7 @@ app.listen(PORT, () => {
 
 var bcrypt = require("bcryptjs");
 const User = db.user;
+const Config = db.config;
 
 var crypto = require('crypto')
 function sha1(data) {
@@ -54,4 +56,9 @@ function initial() {
         year: 1,
         password: bcrypt.hashSync(sha1("password")+"21321", 8)
     });
+    Config.create({
+        id: 1,
+        fastingopen: true,
+        fastingdate: '2021-10-9'
+    })
 }

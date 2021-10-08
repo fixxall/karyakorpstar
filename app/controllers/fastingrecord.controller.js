@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const FastingRecord = db.fastingrecord;
+const Config = db.config;
 
 const Op = db.Sequelize.Op;
 
@@ -24,19 +25,22 @@ exports.cancel = (req, res) => {
 exports.list = (req, res) => {
     User.findAll().then(users => {
         FastingRecord.findAll().then( fastingrecords => {
-            const data = []
-            const listednpms = []
-            fastingrecords.forEach(record => {
-                listednpms.push(record.npm);
+            Config.findOne({where: {id: 1} }).then(config => {
+                const data = []
+                const listednpms = []
+                fastingrecords.forEach(record => {
+                    listednpms.push(record.npm);
+                });
+                users.forEach(user => {
+                    if (listednpms.includes(user.npm)) {
+                        data.push({npm: user.npm, fullname: user.fullname, registered: true});
+                    }else {
+                        data.push({npm: user.npm, fullname: user.fullname, registered: false});
+                    }
+                });
+                const date = config.fastingdate;
+                res.status(200).send({data: data, date: date});
             });
-            users.forEach(user => {
-                if (listednpms.includes(user.npm)) {
-                  data.push({npm: user.npm, fullname: user.fullname, registered: true});
-                }else {
-                  data.push({npm: user.npm, fullname: user.fullname, registered: false});
-                }
-            });
-            res.status(200).send({data: data});
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });
