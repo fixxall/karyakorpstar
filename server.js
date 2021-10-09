@@ -54,6 +54,7 @@ var bcrypt = require("bcryptjs");
 const User = db.user;
 const Config = db.config;
 const FastingRecord = db.fastingrecord;
+const Role = db.role;
 
 var crypto = require('crypto')
 function sha1(data) {
@@ -90,7 +91,7 @@ function initial() {
         fullname: "Wisnu Irawan",
         npm: "1817101465",
         class: "4 RKS Echo",
-        password: bcrypt.hashSync(sha1("password")+"1817101465", 8)
+        password: bcrypt.hashSync(sha1("")+"1817101465", 8)
     }]);
     Config.create({
         id: 1,
@@ -99,7 +100,18 @@ function initial() {
         commerceopen: true,
         commercedate: 'Sat, 09 Oct 2021 00:00:00 EDT'
     });
-    FastingRecord.create({
-        npm: "1918101609"
-    })
+    FastingRecord.bulkCreate([
+        { npm: "1918101609" },
+        { npm: "1918101610" },
+        { npm: "2019101609" },
+    ]);
+    Role.create({
+        id: 1,
+        name: "FASTING ADMIN"
+    });
+    User.findOne({ where: {npm: "1817101465"} }).then( user => {
+        user.setRoles(1);
+    }).catch(err => {
+        console.log({ message: err.message });
+    });
 }

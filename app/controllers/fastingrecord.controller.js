@@ -33,7 +33,7 @@ exports.list = (req, res) => {
     }).then( fastingrecords => {
         Config.findOne({where: {id: 1} }).then(config => {
             const date = config.fastingdate;
-            res.status(200).send({data: fastingrecords, date: date});
+            res.status(200).send({data: fastingrecords, date: date, isOpened: config.fastingopen});
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });

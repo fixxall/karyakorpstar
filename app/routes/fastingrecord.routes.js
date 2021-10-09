@@ -22,16 +22,13 @@ module.exports = function(app) {
 
     app.get("/api/fasting/list", [
         authJwt.verifyToken,
-        config.fastingIsOpen
     ], controller.list);
 
     app.post("/api/fasting/clear", [
-        authJwt.verifyToken,
-        config.fastingIsOpen
+        authJwt.verifyToken
     ], controller.clear);
 
     app.get("/api/fasting/download", [
-        authJwt.verifyToken,
-        config.fastingIsOpen
+        authJwt.verifyToken
     ], controller.download);
 };

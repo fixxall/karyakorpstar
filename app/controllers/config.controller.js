@@ -22,8 +22,7 @@ exports.openfasting = (req, res) => {
 
 exports.closefasting = (req, res) => {
     Config.update({
-        fastingopen: false,
-        fastingdate: 'Mon, 01 Jan 1970 00:00:00 EDT'
+        fastingopen: false
     },{ where:{id: 1}}).then(user => {
         res.status(200).send({ message: "Closed successfully!" });
     }).catch(err => {

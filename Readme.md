@@ -34,7 +34,7 @@ if something went wrong, a json will be sent
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST -d "{\"npm\": \"2019101608\", \"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
+curl -i -X POST -d "{\"npm\": \"1817101465\", \"password\": \"da39a3ee5e6b4b0d3255bfef95601890afd80709\"}" localhost:8080/api/auth/signin -H "Content-Type: application/json"
 ```
 
 ### Authentication
@@ -83,7 +83,7 @@ curl -i -X POST -d "{\"password\": \"5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8\",
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/config/openfasting -d "{\"fastingdate\": \"2021-10-9\"}" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+curl -i -X POST localhost:8080/api/config/openfasting -d "{\"fastingdate\": \"2021-10-9\"}" -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ### Close fasting
@@ -97,7 +97,7 @@ curl -i -X POST localhost:8080/api/config/openfasting -d "{\"fastingdate\": \"20
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/config/closefasting -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzY1Nzk2MSwiZXhwIjoxNjMzNzQ0MzYxfQ.hvkjY7aUTDMBKDuyuHiBY-c71gEeM_89HT3oWdoyCC4"
+curl -i -X POST localhost:8080/api/config/closefasting -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ## Fasting
@@ -112,7 +112,7 @@ curl -i -X POST localhost:8080/api/config/closefasting -H "Content-Type: applica
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMDE5MTAxNjA4IiwiaWF0IjoxNjMzNjg4NzE5LCJleHAiOjE2MzM3NzUxMTl9.Kel3rmdHU4WxQvQSlWhX3SIAUT5aZPYV7hI51-QWJQs"
+curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ### Cancel
@@ -126,7 +126,7 @@ curl -i -X POST localhost:8080/api/fasting/register -H "Content-Type: applicatio
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzE4NjA4MSwiZXhwIjoxNjMzMjcyNDgxfQ.nttJ45rmQWR-xXxkZPowwaZP5sSWjr8pmyrYrXdJRLI"
+curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ### All
@@ -138,10 +138,12 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
         {
             "npm": "NPM1",
             "fullname": "FULLNAME1",
+            "class": "CLASS1",
             "registered": true or false
         }, {
             "npm": "NPM2",
             "fullname": "FULLNAME2",
+            "class": "CLASS2",
             "registered": true or false
         }
     ],
@@ -151,7 +153,7 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
 ##### Windows curl
 ex:
 ```bash
-curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMDE5MTAxNjA4IiwiaWF0IjoxNjMzNjg4NzE5LCJleHAiOjE2MzM3NzUxMTl9.Kel3rmdHU4WxQvQSlWhX3SIAUT5aZPYV7hI51-QWJQs"
+curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ### Clear
@@ -165,7 +167,7 @@ curl -i -X GET localhost:8080/api/fasting/list -H "Content-Type: application/jso
 ##### Windows curl
 ex:
 ```bash
-curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIyMTMyMSIsImlhdCI6MTYzMzQxMzUyMywiZXhwIjoxNjMzNDk5OTIzfQ.6VQoBq_fmQOsCr6m2QFp921TR6qBcNMey4mefrLFouE"
+curl -i -X POST localhost:8080/api/fasting/clear -H "Content-Type: application/json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJucG0iOiIxODE3MTAxNDY1IiwiaWF0IjoxNjMzNzYxMzEwLCJleHAiOjE2MzM4NDc3MTB9.Det921_tBhe1wYBg79r3aO8K3Wiind7HBgwOo0MwFdM"
 ```
 
 ### Download
