@@ -7,27 +7,20 @@ API for Karya Korps Taruna, coded in node-express and implementing JWT authentic
 
 ### Login:
 [POST] /api/auth/login
-1. Recieve npm and SHA1-digested password in JSON
+#### Sent data
 ```Json
 {
     "npm": "INSERT_NPM",
     "password": "INSERT_PASSWORD_SHA1_DIGEST"
 }
 ```
-2. Sanitize input to only recieve decimal numbers on npm and hexadecimal numbers on password
-3. Check if user exist. If not, return
-4. Check if recieved password matches
-5. Return response
+#### Response
 ```json
 {
-    "fullname": "USER_FULLNAME",
+    "npm": "USER_NPM",
+    "isFastingAdmin": true or false,
+    "isCommerceAdmin": true or false,
     "accessToken": "BEARER_TOKEN"
-}
-```
-if something went wrong, a json will be sent
-```json
-{
-    "message": "ERROR_MESSAGE"
 }
 ```
 
@@ -147,7 +140,8 @@ curl -i -X POST localhost:8080/api/fasting/cancel -H "Content-Type: application/
             "registered": true or false
         }
     ],
-    "date": "FASTING_DATE_IN_YYYY-MM-DD_FORMAT"
+    "date": "FASTING_DATE_IN_YYYY-MM-DD_FORMAT",
+    "isOpened": true or false
 }
 ```    
 ##### Windows curl

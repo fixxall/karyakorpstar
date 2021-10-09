@@ -1,5 +1,5 @@
 const controller = require("../controllers/config.controller");
-const { authJwt } = require("../middleware");
+const { authJwt, admin } = require("../middleware");
 const { check } = require('express-validator')
 
 module.exports = function(app) {
@@ -13,10 +13,12 @@ module.exports = function(app) {
 
     app.post("/api/config/openfasting", [
         authJwt.verifyToken,
-        check('fastingdate').isLength({max: 29, min: 29})
+        check('fastingdate').isLength({max: 29}),
+        admin.isFastingAdmin
     ], controller.openfasting);
 
     app.post("/api/config/closefasting", [
         authJwt.verifyToken,
+        admin.isFastingAdmin
     ], controller.closefasting);
 };

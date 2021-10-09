@@ -96,9 +96,9 @@ function initial() {
     Config.create({
         id: 1,
         fastingopen: true,
-        fastingdate: 'Sat, 09 Oct 2021 00:00:00 EDT',
+        fastingdate: 'Sat, 09 Oct 2021',
         commerceopen: true,
-        commercedate: 'Sat, 09 Oct 2021 00:00:00 EDT'
+        commercedate: 'Sat, 09 Oct 2021'
     });
     FastingRecord.bulkCreate([
         { npm: "1918101609" },

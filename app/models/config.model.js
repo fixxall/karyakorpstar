@@ -6,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
             defaultValue: false
         },
         fastingdate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.STRING
         },
         commerceopen: {
             type: Sequelize.BOOLEAN,
@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
             defaultValue: false
         },
         commercedate: {
-            type: Sequelize.DATEONLY
+            type: Sequelize.STRING
         }
     });
 

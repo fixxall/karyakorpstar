@@ -1,5 +1,5 @@
 const controller = require("../controllers/fastingrecord.controller");
-const { authJwt, config } = require("../middleware");
+const { authJwt, admin, config } = require("../middleware");
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -25,10 +25,12 @@ module.exports = function(app) {
     ], controller.list);
 
     app.post("/api/fasting/clear", [
-        authJwt.verifyToken
+        authJwt.verifyToken,
+        admin.isFastingAdmin
     ], controller.clear);
 
     app.get("/api/fasting/download", [
-        authJwt.verifyToken
+        authJwt.verifyToken,
+        admin.isFastingAdmin
     ], controller.download);
 };
