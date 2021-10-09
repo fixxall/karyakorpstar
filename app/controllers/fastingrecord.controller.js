@@ -25,24 +25,15 @@ exports.cancel = (req, res) => {
 };
 
 exports.list = (req, res) => {
-    User.findAll().then(users => {
-        FastingRecord.findAll().then( fastingrecords => {
-            Config.findOne({where: {id: 1} }).then(config => {
-                const data = []
-                const listednpms = []
-                fastingrecords.forEach(record => {
-                    listednpms.push(record.npm);
-                });
-                users.forEach(user => {
-                    if (listednpms.includes(user.npm)) {
-                        data.push({npm: user.npm, fullname: user.fullname, registered: true});
-                    }else {
-                        data.push({npm: user.npm, fullname: user.fullname, registered: false});
-                    }
-                });
-                const date = config.fastingdate;
-                res.status(200).send({data: data, date: date});
-            });
+    FastingRecord.findAll({
+        include: {
+            model: User,
+            attributes: ['fullname', 'class']
+        }
+    }).then( fastingrecords => {
+        Config.findOne({where: {id: 1} }).then(config => {
+            const date = config.fastingdate;
+            res.status(200).send({data: fastingrecords, date: date});
         });
     }).catch(err => {
         res.status(500).send({ message: err.message });
@@ -62,7 +53,7 @@ exports.download = (req, res) => {
         FastingRecord.findAll({
             include: {
                 model: User,
-                attributes: ['npm', 'fullname', 'class']
+                attributes: ['fullname', 'class']
             }
         }).then(fastingrecords => {
             array = []
@@ -71,7 +62,7 @@ exports.download = (req, res) => {
             });
 
             const csvWriter = createCsvWriter({
-                path: `${__dirname}/export/datapuasa_${config.fastingdate}.csv`,
+                path: `${__dirname}/../export/datapuasa_${config.fastingdate}.csv`,
                 header: [
                     { id: "id", title: "id" },
                     { id: "npm", title: "npm" },
@@ -81,7 +72,7 @@ exports.download = (req, res) => {
             });
             csvWriter.writeRecords(array).then(() => {
                 res.setHeader('Content-disposition', 'attachment; filename=' + 'datapuasa.csv');
-                const file = `${__dirname}/export/datapuasa_${config.fastingdate}.csv`;
+                const file = `${__dirname}/../export/datapuasa_${config.fastingdate}.csv`;
                 res.download(file);
             });
         });

@@ -24,6 +24,7 @@ commerceIsOpen = (req, res, next) => {
 };
 
 const config = {
-    fastingIsOpen: fastingIsOpen
+    fastingIsOpen: fastingIsOpen,
+    commerceIsOpen: commerceIsOpen
 };
 module.exports = config;

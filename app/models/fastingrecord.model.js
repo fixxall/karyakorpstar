@@ -3,9 +3,10 @@ module.exports = (sequelize, Sequelize) => {
         npm: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            primaryKey: true
         }
-    });
+    }, { timestamps: false });
 
     return FastingRecord;
 };

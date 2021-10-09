@@ -4,11 +4,11 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-    origin: "http://localhost:8081"
-};
+// var corsOptions = {
+//     origin: "http://localhost:8080"
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());//corsOptions));
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -79,6 +79,18 @@ function initial() {
         npm: "1918101609",
         class: "3 RKS Python",
         password: bcrypt.hashSync(sha1("password")+"1918101609", 8)
+    },{
+        id: 4,
+        fullname: "Adek Muhammad Zulkham Ristiawan Kertanegara",
+        npm: "1918101610",
+        class: "3 RPLK",
+        password: bcrypt.hashSync(sha1("password")+"1918101610", 8)
+    },{
+        id: 5,
+        fullname: "Wisnu Irawan",
+        npm: "1817101465",
+        class: "4 RKS Echo",
+        password: bcrypt.hashSync(sha1("password")+"1817101465", 8)
     }]);
     Config.create({
         id: 1,
