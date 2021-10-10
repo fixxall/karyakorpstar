@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2021 at 10:38 AM
+-- Generation Time: Oct 10, 2021 at 04:38 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -100,6 +100,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
+(2, 'COMMERCE ADMIN'),
 (1, 'FASTING ADMIN');
 
 -- --------------------------------------------------------
@@ -358,7 +359,7 @@ INSERT INTO `users` (`npm`, `fullname`, `class`, `password`, `createdAt`, `updat
 ('2019101606', 'Habib Alfitrah S', '2 RPK ', '$2a$08$dmCYLZ2gvdrf4IC7.ieFoOfkP8ifPQ.yyAKpR1.qQ9CrW2kh8GECm', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
 ('2019101607', 'Happy Sandhiyadini Rosari', '2 RPLK', '$2a$08$qWWicY0LWfoRXrBoJfycxO/ONp5Sm4FqGShnagK2j2/rjNy1LiicC', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
 ('2019101608', 'Herisa Pratama Nur Baeti', '2 RPLK', '$2a$08$BX/3rbmo5fLNai24ObNmdu8xDzwZ/W1PeOAD0IxLXp4wNur9AVO.O', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
-('2019101609', 'Herlambang Rafli Wicaksono', '2 RPLK', '$2a$08$zkst/c8c0fKP/l25XCsbaOeg0oG6LdAbZ3IrAFCkL2p6LNarLaT3S', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
+('2019101609', 'Herlambang Rafli Wicaksono', '2 RPLK', '$2a$08$zkst/c8c0fKP/l25XCsbaOeg0oG6LdAbZ3IrAFCkL2p6LNarLaT3S', '2021-10-10 08:10:56', '2021-10-10 14:08:59', 64),
 ('2019101610', 'I Gede Gilang Dharma Suputra', '2 RKS Red', '$2a$08$bP1Y6q2RVlD/4hcqBc74BOdLgjTEejlEf8gKB7LVuzKCOr3PtyOum', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
 ('2019101611', 'Ihsan Fadli Tampati', '2 RPLK', '$2a$08$CBB3iKUcOsQYqc3uKhlDbujTTakkLJm6aUgnu2W/e7XBtLB02sKO2', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
 ('2019101612', 'Ilham Dwi Harjanto', '2 RKS Red', '$2a$08$Thlk7pDROrGKgXVRa3Lfu.acwZSTh1EQkRaKRp5NF3fbN5zLCrVpa', '2021-10-10 08:10:56', '2021-10-10 08:10:56', NULL),
@@ -433,7 +434,8 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`userNpm`, `roleId`) VALUES
-('1817101465', 1);
+('1817101465', 1),
+('1817101465', 2);
 
 --
 -- Indexes for dumped tables
@@ -501,7 +503,7 @@ ALTER TABLE `configs`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

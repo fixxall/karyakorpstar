@@ -21,4 +21,15 @@ module.exports = function(app) {
         authJwt.verifyToken,
         admin.isFastingAdmin
     ], controller.closefasting);
+
+    app.post("/api/config/opencommerce", [
+        authJwt.verifyToken,
+        check('commercedate').isLength({max: 29}),
+        admin.isCommerceAdmin
+    ], controller.opencommerce);
+
+    app.post("/api/config/closecommerce", [
+        authJwt.verifyToken,
+        admin.isCommerceAdmin
+    ], controller.closecommerce);
 };

@@ -1,5 +1,5 @@
 const controller = require("../controllers/commercerecord.controller");
-const { authJwt } = require("../middleware");
+const { authJwt, config, admin } = require("../middleware");
 const { check } = require('express-validator')
 
 module.exports = function(app) {
@@ -13,6 +13,7 @@ module.exports = function(app) {
 
     app.post("/api/commerce/order", [
         authJwt.verifyToken,
+        config.commerceIsOpen,
         check('productname').isLength({ max:40 }),
         check('quantity').isNumeric(),
         check('price').isNumeric()
@@ -20,18 +21,31 @@ module.exports = function(app) {
 
     app.get("/api/commerce/list", [authJwt.verifyToken], controller.list);
 
-    app.get("/api/commerce/all", [authJwt.verifyToken], controller.all);
+    app.get("/api/commerce/all", [
+        authJwt.verifyToken,
+        admin.isCommerceAdmin
+    ], controller.all);
 
-    app.post("/api/commerce/admit", [authJwt.verifyToken], controller.admit);
+    app.post("/api/commerce/admit", [
+        authJwt.verifyToken,
+        admin.isCommerceAdmin
+    ], controller.admit);
 
-    app.post("/api/commerce/deny", [authJwt.verifyToken], controller.deny);
+    app.post("/api/commerce/deny", [
+        authJwt.verifyToken,
+        admin.isCommerceAdmin
+    ], controller.deny);
 
     app.post("/api/commerce/modify", [
         authJwt.verifyToken,
+        admin.isCommerceAdmin,
         check('id').isNumeric(),
         check('quantity').isNumeric(),
         check('price').isNumeric()
     ], controller.modify);
 
-    app.post("/api/commerce/clear", [authJwt.verifyToken], controller.clear);
+    app.post("/api/commerce/clear", [
+        authJwt.verifyToken,
+        admin.isCommerceAdmin
+    ], controller.clear);
 };

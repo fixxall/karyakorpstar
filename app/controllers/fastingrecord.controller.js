@@ -1,6 +1,8 @@
 const db = require("../models");
-const config = require("../config/auth.config");
 const User = db.user;
+const Room = db.room;
+const Building = db.building;
+const Locus = db.locus;
 const FastingRecord = db.fastingrecord;
 const Config = db.config;
 
@@ -53,21 +55,42 @@ exports.download = (req, res) => {
         FastingRecord.findAll({
             include: {
                 model: User,
-                attributes: ['fullname', 'class']
+                attributes: ['fullname', 'class'],
+                include: {
+                    model: Room,
+                    attributes: ['number'],
+                    include: {
+                        model: Building,
+                        attributes: ['name'],
+                        include: {
+                            model: Locus,
+                            attributes: ['name'],
+                        }
+                    }
+                }
             }
         }).then(fastingrecords => {
             array = []
             fastingrecords.forEach((record) => {
-                array.push({id: record.id, npm: record.npm, fullname: record.user.fullname, class: record.user.class})
+                array.push({
+                    npm: record.npm,
+                    fullname: record.user.fullname,
+                    class: record.user.class,
+                    room: !record.user.room ? null : record.user.room.number,
+                    building: !record.user.room ? null : record.user.room.building.name,
+                    locus: !record.user.room ? null : record.user.room.building.locuse.name
+                })
             });
 
             const csvWriter = createCsvWriter({
                 path: `${__dirname}/../export/datapuasa_${config.fastingdate}.csv`,
                 header: [
-                    { id: "id", title: "id" },
                     { id: "npm", title: "npm" },
                     { id: "fullname", title: "fullname" },
-                    { id: "class", title: "class" }
+                    { id: "class", title: "class" },
+                    { id: "room", title: "room" },
+                    { id: "building", title: "building" },
+                    { id: "locus", title: "locus" },
                 ]
             });
             csvWriter.writeRecords(array).then(() => {
