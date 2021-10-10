@@ -20,7 +20,7 @@ const db = require("./app/models");
 
 // db.sequelize.sync({ force: true }).then(() => {
 //     console.log('Drop and Resync Db');
-// db.sequelize.sync().then(() => {
+// // db.sequelize.sync().then(() => {
 //     initial();
 // });
 
@@ -71,30 +71,30 @@ function initial() {
     //     });
     // });
 
-    User.bulkCreate(data).then(x => {
-        FastingRecord.bulkCreate([
-            { npm: "1817101467" },
-            { npm: "1817101468" },
-            { npm: "2019101600" },
-            { npm: "2019101601" },
-            { npm: "2019101602" },
-            { npm: "2019101609" }
-        ]);
-        Role.create({
-            id: 1,
-            name: "FASTING ADMIN"
-        });
-        User.findOne({ where: {npm: "1817101465"} }).then( user => {
-            user.setRoles(1);
-        }).catch(err => {
-            console.log({ message: err.message });
-        });
-    });
-    Config.create({
-        id: 1,
-        fastingopen: true,
-        fastingdate: 'Sat, 09 Oct 2021',
-        commerceopen: true,
-        commercedate: 'Sat, 09 Oct 2021'
-    });
+    // User.bulkCreate(data).then(x => {
+    //     FastingRecord.bulkCreate([
+    //         { npm: "1817101467" },
+    //         { npm: "1817101468" },
+    //         { npm: "2019101600" },
+    //         { npm: "2019101601" },
+    //         { npm: "2019101602" },
+    //         { npm: "2019101609" }
+    //     ]);
+    //     Role.create({
+    //         id: 1,
+    //         name: "FASTING ADMIN"
+    //     });
+    //     User.findOne({ where: {npm: "1817101465"} }).then( user => {
+    //         user.setRoles(1);
+    //     }).catch(err => {
+    //         console.log({ message: err.message });
+    //     });
+    // });
+    // Config.create({
+    //     id: 1,
+    //     fastingopen: true,
+    //     fastingdate: 'Sat, 09 Oct 2021',
+    //     commerceopen: true,
+    //     commercedate: 'Sat, 09 Oct 2021'
+    // });
 }

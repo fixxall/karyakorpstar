@@ -17,10 +17,22 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
+db.room = require("../models/room.model.js")(sequelize, Sequelize);
+db.building = require("../models/building.model.js")(sequelize, Sequelize);
+db.locus = require("../models/locus.model.js")(sequelize, Sequelize);
 db.fastingrecord = require("../models/fastingrecord.model.js")(sequelize, Sequelize);
 db.commercerecord = require("../models/commercerecord.model.js")(sequelize, Sequelize);
 db.config = require("../models/config.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
+
+db.room.hasMany(db.user);
+db.user.belongsTo(db.room);
+
+db.building.hasMany(db.room);
+db.room.belongsTo(db.building);
+
+db.locus.hasMany(db.building);
+db.building.belongsTo(db.locus);
 
 db.user.hasOne(db.fastingrecord, {
   foreignKey: 'npm'
