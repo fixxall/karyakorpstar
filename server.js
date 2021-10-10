@@ -18,10 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and Resync Db');
-    initial();
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log('Drop and Resync Db');
+// db.sequelize.sync().then(() => {
+//     initial();
+// });
 
 const cron = require('node-cron');
 const fsExtra = require('fs-extra')
@@ -50,68 +51,50 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
 
-var bcrypt = require("bcryptjs");
 const User = db.user;
 const Config = db.config;
 const FastingRecord = db.fastingrecord;
 const Role = db.role;
 
-var crypto = require('crypto')
-function sha1(data) {
-    return crypto.createHash("sha1").update(data).digest("hex");
-}
+const {data} = require('./dummy.js');
 
 function initial() {
-    User.bulkCreate([{
-        id: 1,
-        fullname: "Herisa Pratama Nur Baeti",
-        npm: "2019101608",
-        class: "2 RPLK",
-        password: bcrypt.hashSync(sha1("password")+"2019101608", 8)
-    },{
-        id: 2,
-        fullname: "Herlambang Rafli Wicaksono",
-        npm: "2019101609",
-        class: "2 RPLK",
-        password: bcrypt.hashSync(sha1("password")+"2019101609", 8)
-    },{
-        id: 3,
-        fullname: "Abidah Salsabila Putri Sanita",
-        npm: "1918101609",
-        class: "3 RKS Python",
-        password: bcrypt.hashSync(sha1("password")+"1918101609", 8)
-    },{
-        id: 4,
-        fullname: "Adek Muhammad Zulkham Ristiawan Kertanegara",
-        npm: "1918101610",
-        class: "3 RPLK",
-        password: bcrypt.hashSync(sha1("password")+"1918101610", 8)
-    },{
-        id: 5,
-        fullname: "Wisnu Irawan",
-        npm: "1817101465",
-        class: "4 RKS Echo",
-        password: bcrypt.hashSync(sha1("")+"1817101465", 8)
-    }]);
+    // data.forEach(record => {
+    //     User.create({
+    //         npm: record.npm,
+    //         fullname: record.fullname,
+    //         class: record.class,
+    //         password: record.password,
+    //     }).catch(err => {
+    //         console.log(record.npm);
+    //         console.log({ message: err.message });
+    //     });
+    // });
+
+    User.bulkCreate(data).then(x => {
+        FastingRecord.bulkCreate([
+            { npm: "1817101467" },
+            { npm: "1817101468" },
+            { npm: "2019101600" },
+            { npm: "2019101601" },
+            { npm: "2019101602" },
+            { npm: "2019101609" }
+        ]);
+        Role.create({
+            id: 1,
+            name: "FASTING ADMIN"
+        });
+        User.findOne({ where: {npm: "1817101465"} }).then( user => {
+            user.setRoles(1);
+        }).catch(err => {
+            console.log({ message: err.message });
+        });
+    });
     Config.create({
         id: 1,
         fastingopen: true,
         fastingdate: 'Sat, 09 Oct 2021',
         commerceopen: true,
         commercedate: 'Sat, 09 Oct 2021'
-    });
-    FastingRecord.bulkCreate([
-        { npm: "1918101609" },
-        { npm: "1918101610" },
-        { npm: "2019101609" },
-    ]);
-    Role.create({
-        id: 1,
-        name: "FASTING ADMIN"
-    });
-    User.findOne({ where: {npm: "1817101465"} }).then( user => {
-        user.setRoles(1);
-    }).catch(err => {
-        console.log({ message: err.message });
     });
 }
