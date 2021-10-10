@@ -1,11 +1,12 @@
 module.exports = (sequelize, Sequelize) => {
-    const User = sequelize.define("fasting_records", {
+    const FastingRecord = sequelize.define("fasting_records", {
         npm: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            primaryKey: true
         }
-    });
+    }, { timestamps: false });
 
-    return User;
+    return FastingRecord;
 };

@@ -1,6 +1,7 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
+const Role = db.role;
 
 const Op = db.Sequelize.Op;
 
@@ -16,6 +17,10 @@ exports.signin = (req, res) => {
     User.findOne({
             where: {
                 npm: req.body.npm
+            },
+            include: {
+                model: Role,
+                attributes: ['id', 'name']
             }
         })
         .then(user => {
@@ -38,8 +43,22 @@ exports.signin = (req, res) => {
                 expiresIn: 86400 // 24 hours
             });
 
+            var isFastingAdmin = false;
+            var isCommerceAdmin = false;
+            user.roles.forEach((role) => {
+                switch (role.id) {
+                    case 1: isFastingAdmin = true; break;
+                    case 2: isCommerceAdmin = true; break;
+                }
+            });
+
+
             res.status(200).send({
-                fullname: user.fullname,
+                npm: user.npm,
+                // fullname: user.fullname,
+                // class: user.class,
+                isFastingAdmin: isFastingAdmin,
+                isCommerceAdmin: isCommerceAdmin,
                 accessToken: token
             });
         })

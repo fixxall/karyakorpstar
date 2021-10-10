@@ -1,4 +1,6 @@
+const controller = require("../controllers/user.controller");
 const { authJwt } = require("../middleware");
+const { check } = require('express-validator')
 
 module.exports = function(app) {
     app.use(function(req, res, next) {
@@ -8,4 +10,11 @@ module.exports = function(app) {
         );
         next();
     });
+
+    app.get("/api/user/profile", [authJwt.verifyToken], controller.profile);
+
+    app.post("/api/user/update", [
+        authJwt.verifyToken,
+        check('room').isNumeric()
+    ], controller.update);
 };
